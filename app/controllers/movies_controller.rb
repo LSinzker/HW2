@@ -1,8 +1,11 @@
 # This file is app/controllers/movies_controller.rb
 class MoviesController < ApplicationController
   def index
-    @sort = params[:sort] || 'id'
-    @movies = Movie.order(@sort)
+    #debugger
+    sort = params[:sort] || 'id'
+    @movies = Movie.order(sort)
+    @title_sort = hiliter('title')
+    @rating_sort = hiliter('rating')
   end
 
   def show
@@ -44,6 +47,14 @@ class MoviesController < ApplicationController
     @movie.destroy
     flash[:notice] = "#{@movie.title} was deleted!"
     redirect_to movies_path
+  end
+
+  def hiliter(field)
+    if params[:sort].to_s == field
+      'hilite'
+    else
+      "null"
+    end
   end
 
 end
