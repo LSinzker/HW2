@@ -6,6 +6,7 @@ class MoviesController < ApplicationController
     @movies = Movie.order(sort)
     @title_sort = hiliter('title')
     @rating_sort = hiliter('rating')
+    @all_ratings = Movie.all_ratings.keys
   end
 
   def show

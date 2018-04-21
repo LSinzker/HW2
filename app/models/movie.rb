@@ -3,14 +3,19 @@ require 'active_record'
 class Movie < ActiveRecord::Base
   #self.abstract_class = true
   #attr_accessible :title, :rating, :description, :release_date
+
   def self.all_ratings
     result = {}
     self.select(:rating).uniq.each do |movie|
       result[movie.rating] = 1
     end
-    result result
+    result
   end
 end
+
+
+
+
 # starwars = Movie.create!(:title => 'Star Wars',
 # 	  :release_date => '25/4/1977', :rating => 'PG')
 # 	# note that numerical dates follow European format: dd/mm/yyyy
