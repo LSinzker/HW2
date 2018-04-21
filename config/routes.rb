@@ -5,4 +5,7 @@
 Myrottenpotatoes::Application.routes.draw do
   resources :movies
   root :to => redirect('/movies')
+
+  #get 'about' => 'pages#about'
+
 end

@@ -4,7 +4,11 @@ class Movie < ActiveRecord::Base
   #self.abstract_class = true
   #attr_accessible :title, :rating, :description, :release_date
   def self.all_ratings
-     %w(G PG PG-13 NC-17 R)
+    result = {}
+    self.select(:rating).uniq.each do |movie|
+      result[movie.rating] = 1
+    end
+    result result
   end
 end
 # starwars = Movie.create!(:title => 'Star Wars',
