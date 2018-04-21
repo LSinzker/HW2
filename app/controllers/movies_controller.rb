@@ -3,10 +3,19 @@ class MoviesController < ApplicationController
   def index
     #debugger
     sort = params[:sort] || 'id'
-    @movies = Movie.order(sort)
+
+    @all_ratings = Movie.all_ratings.keys
+
+    if params.has_key? :ratings
+      selected_ratings = params[:ratings].keys
+    else
+      selected_ratings = @all_ratings
+    end
+
     @title_sort = hiliter('title')
     @rating_sort = hiliter('rating')
-    @all_ratings = Movie.all_ratings.keys
+
+    @movies = Movie.order(sort).where(rating: selected_ratings)
   end
 
   def show
